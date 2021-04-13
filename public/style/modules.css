@@ -1,0 +1,13 @@
+img {
+    display: block;
+    margin: auto;
+    width: 20%;
+}
+
+li {
+    margin: auto;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border: solid;
+}
