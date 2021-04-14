@@ -5,18 +5,42 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style/base.css">
-  <link rel="stylesheet" href="style/layout.css">
-  <link rel="stylesheet" href="style/modules.css">
+  <link rel="stylesheet" href="/style/base.css">
+  <link rel="stylesheet" href="/style/layout.css">
+  <link rel="stylesheet" href="/style/modules.css">
   <link rel="stylesheet" href="/public/style/reset.css">
-
   <title>Document</title>
 </head>
 
 <body>
-  <h1>Book Application</h1>
-  <a href="/">Home</a>
-  <a href="/searches/new">Google Books</a>
+  <header></header>
+  <main>
+    <h1>Book App</h1>
+    <a href="/">Home</a>
+    <a href="/searches/new"> Google Books </a>
+
+    <p> Your books has ( <%= count %>) Books </p>
+
+
+      <% books.forEach(item=>{ %>
+        <img src="<%= item.image_url %>">
+        <p>
+          <%= item.title %>
+        </p>
+        <p>
+          <%= item.author %>
+        </p>
+        <form action="/books/<%=item.id %>" method="GET">
+          <input type="hidden" name="title" value="<%= item.title %>">
+          <input type="hidden" name="author" value="<%= item.author %>">
+          <input type="hidden" name="description" value="<%= item.description %>">
+          <input type="hidden" name="image_url" value="<%= item.image_url%>">
+          <button>Details</button>
+        </form>
+        <% })%>
+
+  </main>
+  <footer></footer>
 </body>
 
 </html>

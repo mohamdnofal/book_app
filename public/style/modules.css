@@ -11,3 +11,13 @@ li {
     padding: 10px;
     border: solid;
 }
+
+p {
+    text-align: center;
+}
+
+div {
+    border: ridge;
+    margin-bottom: 20px;
+    border-color: black;
+}

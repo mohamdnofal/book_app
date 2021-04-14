@@ -8,14 +8,15 @@ body {
 a {
     text-align: center;
     display: block;
-    padding-bottom: 20px;
+    padding: 20px;
     margin-top: 20px;
     text-decoration: solid;
-    color: blue;
+    color:white;
     border: solid;
     border-color: black;
     width: 30%;
     margin: auto;
+    margin-bottom: 10px;
 }
 
 input[type="text"] {
@@ -36,6 +37,8 @@ button {
     margin: auto;
     display: block;
     margin-top: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 h1 {
