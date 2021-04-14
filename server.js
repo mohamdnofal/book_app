@@ -24,9 +24,9 @@ server.get( '/books/:id',booksDetails );
 server.post( '/books' , choseBook );
 
 const client = new pg.Client( {connectionString: process.env.DATABASE_URL,
-  // ssl: {
-  //   rejectUnauthorized : false
-  // }
+  ssl: {
+    rejectUnauthorized : false
+  }
 });
 
 
