@@ -35,7 +35,36 @@
                     <%= detail.isbn %>
                 </p>
             </div>
-    </main>
-</body>
 
+            <form action="/delete/<%=detail.id%>?_method=delete" method="post">
+                <button>Delete Book</button>
+            </form>
+            <button id='updateBtn'>Update Details</button>
+
+        <section id='updateForm'>
+            <form action="/updateBook/<%=detail.id%>?_method=put" method="post">
+                <input type="text" name="title" placeholder="Populated title" value=' <%= detail.title  %> '> <br>
+                
+                <input type="text" name="author" placeholder="Populated author" value="<%= detail.author  %>"> <br>
+                
+                <input type="text" name="image_url" placeholder="Populated image url" value="<%= detail.image_url %>">  <br>
+               
+                <input type="text" name="isbn" placeholder="Populated ISBN" value="<%= detail.isbn  %>"> <br>
+                
+                <textarea name="description" placeholder="Populated description" cols="30" 
+                    rows="10"><%= detail.description %></textarea> <br>
+                
+                <button type="submit">Update Book</button>
+            </form>
+        </section>
+    </section>
+
+    </main>
+
+    <footer></footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/app.js"></script>
+    
+</body>
 </html>
