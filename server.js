@@ -3,13 +3,18 @@
 require('dotenv').config();
 
 const express = require('express');
+
 const server = express();
 
 const superagent = require('superagent');
 
-const pg = require('pg');
+const methodOverride = require('method-override');
 
 const PORT = process.env.PORT || 3000;
+
+const pg = require('pg');
+
+server.use(methodOverride('_method'));
 
 server.set('view engine','ejs');
 
@@ -22,6 +27,9 @@ server.get( '/searches/new', searchRoute );
 server.post( '/searches',booksRoute );
 server.get( '/books/:id',booksDetails );
 server.post( '/books' , choseBook );
+server.delete( '/delete/:id',deleteBooks );
+server.put( '/updateBook/:id',updateBooks );
+
 
 const client = new pg.Client( {connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -105,6 +113,25 @@ function choseBook (req,res){
     });
 }
 
+
+function deleteBooks( req,res ) {
+  let SQL = `DELETE FROM books WHERE id=$1;`;
+  let value = [req.params.id];
+  client.query( SQL,value )
+    .then( res.redirect( '/' ) );
+}
+
+function updateBooks ( req,res ){
+  let { title, author, isbn, image_url, description} = req.body;
+  let SQL = 'UPDATE books SET title=$1, author=$2, isbn=$3, image_url=$4, description=$5 WHERE id=$6 ;';
+  let safeValues = [title, author, isbn, image_url, description, req.params.id];
+  console.log( 'hello',req.params.id );
+  client.query( SQL, safeValues )
+    .then( ()=>{
+      res.redirect( `/book/${req.params.id}` );
+    } );
+}
+
 server.get('*',(req,res)=>{
   res.send('Error');
 });
@@ -117,3 +144,4 @@ client.connect()
   }).catch(error=>{
     console.log(error);
   });
+
